@@ -1,0 +1,10 @@
+C:\Users\Windows\source\repos\ClienteApiTest\bin\Debug\ClienteApiTest.exe.config
+C:\Users\Windows\source\repos\ClienteApiTest\bin\Debug\ClienteApiTest.exe
+C:\Users\Windows\source\repos\ClienteApiTest\bin\Debug\ClienteApiTest.pdb
+C:\Users\Windows\source\repos\ClienteApiTest\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Windows\source\repos\ClienteApiTest\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Windows\source\repos\ClienteApiTest\obj\Debug\ClienteApiTest.csproj.AssemblyReference.cache
+C:\Users\Windows\source\repos\ClienteApiTest\obj\Debug\ClienteApiTest.csproj.CoreCompileInputs.cache
+C:\Users\Windows\source\repos\ClienteApiTest\obj\Debug\ClienteA.3CE36806.Up2Date
+C:\Users\Windows\source\repos\ClienteApiTest\obj\Debug\ClienteApiTest.exe
+C:\Users\Windows\source\repos\ClienteApiTest\obj\Debug\ClienteApiTest.pdb
