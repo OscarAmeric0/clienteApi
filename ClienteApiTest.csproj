@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiResponse.cs" />
+    <Compile Include="AppOrchestrator.cs" />
+    <Compile Include="ConsoleReportView.cs" />
     <Compile Include="EquipmentService.cs" />
     <Compile Include="IEquipmentService.cs" />
     <Compile Include="Program.cs" />
