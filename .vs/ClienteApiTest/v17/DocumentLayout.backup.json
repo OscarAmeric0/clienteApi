@@ -3,11 +3,19 @@
   "WorkspaceRootPath": "C:\\Users\\Windows\\source\\repos\\ClienteApiTest\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E04257FB-2535-4CC3-AA4B-8F25BD0687F7}|ClienteApiTest.csproj|c:\\users\\windows\\source\\repos\\clienteapitest\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E04257FB-2535-4CC3-AA4B-8F25BD0687F7}|ClienteApiTest.csproj|C:\\Users\\Windows\\source\\repos\\ClienteApiTest\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E04257FB-2535-4CC3-AA4B-8F25BD0687F7}|ClienteApiTest.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E04257FB-2535-4CC3-AA4B-8F25BD0687F7}|ClienteApiTest.csproj|c:\\users\\windows\\source\\repos\\clienteapitest\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "AbsoluteMoniker": "D:0:0:{E04257FB-2535-4CC3-AA4B-8F25BD0687F7}|ClienteApiTest.csproj|C:\\Users\\Windows\\source\\repos\\ClienteApiTest\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E04257FB-2535-4CC3-AA4B-8F25BD0687F7}|ClienteApiTest.csproj|solutionrelative:apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E04257FB-2535-4CC3-AA4B-8F25BD0687F7}|ClienteApiTest.csproj|c:\\users\\windows\\source\\repos\\clienteapitest\\equipmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E04257FB-2535-4CC3-AA4B-8F25BD0687F7}|ClienteApiTest.csproj|solutionrelative:equipmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E04257FB-2535-4CC3-AA4B-8F25BD0687F7}|ClienteApiTest.csproj|C:\\Users\\Windows\\source\\repos\\ClienteApiTest\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{E04257FB-2535-4CC3-AA4B-8F25BD0687F7}|ClienteApiTest.csproj|solutionrelative:app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     }
   ],
@@ -18,19 +26,44 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "App.config",
               "DocumentMoniker": "C:\\Users\\Windows\\source\\repos\\ClienteApiTest\\App.config",
               "RelativeDocumentMoniker": "App.config",
               "ToolTip": "C:\\Users\\Windows\\source\\repos\\ClienteApiTest\\App.config",
               "RelativeToolTip": "App.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2026-10-31T16:33:49.777Z",
+              "WhenOpened": "2026-10-31T21:29:48.713Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EquipmentService.cs",
+              "DocumentMoniker": "C:\\Users\\Windows\\source\\repos\\ClienteApiTest\\EquipmentService.cs",
+              "RelativeDocumentMoniker": "EquipmentService.cs",
+              "ToolTip": "C:\\Users\\Windows\\source\\repos\\ClienteApiTest\\EquipmentService.cs",
+              "RelativeToolTip": "EquipmentService.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwCsAAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-31T21:27:30.031Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApiResponse.cs",
+              "DocumentMoniker": "C:\\Users\\Windows\\source\\repos\\ClienteApiTest\\ApiResponse.cs",
+              "RelativeDocumentMoniker": "ApiResponse.cs",
+              "ToolTip": "C:\\Users\\Windows\\source\\repos\\ClienteApiTest\\ApiResponse.cs",
+              "RelativeToolTip": "ApiResponse.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAA3wFEAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-31T21:23:04.808Z",
               "EditorCaption": ""
             },
             {
@@ -41,9 +74,9 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Windows\\source\\repos\\ClienteApiTest\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAuwCQAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-31T16:11:58.617Z",
+              "WhenOpened": "2026-10-31T21:12:39.727Z",
               "EditorCaption": ""
             }
           ]

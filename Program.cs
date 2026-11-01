@@ -7,74 +7,107 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Configuration;
+using ClienteApiTest.Services;
+using ClienteApiTest.Models;
 
 
 namespace ClienteApiTest
 {
     internal class Program
     {// Instancia única de HttpClient recomendada para evitar agotamiento de sockets
-        private static readonly HttpClient client = new HttpClient();
+        private static readonly HttpClient sharedClient = new HttpClient();
 
         static async Task Main(string[] args)
         {
-            Console.WriteLine("=== Iniciando Cliente Integrador .NET ===");
+            Console.WriteLine("=== Iniciando Cliente Integrador (.NET 4.7.2) ===");
 
-            // 1. Cargar configuraciones del App.config
-            string baseUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] ?? "https://pesoexato.com";
-            string tokenSimulado = ConfigurationManager.AppSettings["SimulationToken"] ?? "v3-demo-token";
+            // 1. Leer directamente los valores exactos de tu App.config
+            string baseUrl = ConfigurationManager.AppSettings["ApiBaseUrl"];
+            string tokenSimulado = ConfigurationManager.AppSettings["SimulationToken"];
+            string authStrategy = ConfigurationManager.AppSettings["AuthStrategy"] ?? "Bearer";
+
+            // 2. Inyectar configuraciones al Servicio Arquitectónico
+            IEquipmentService equipmentService = new EquipmentService(sharedClient, baseUrl, authStrategy, tokenSimulado);
 
             try
             {
-                // 2. Configurar el HttpClient Base
-                client.BaseAddress = new Uri(baseUrl);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                Console.WriteLine("\n[Petición] Consultando el endpoint estructurado...");
+                var resultado = await equipmentService.GetEquipmentsAsync();
+                // 3. Llamada al método especializado para imprimir los datos
+                ImprimirReporteEquipos(resultado);
 
-                // 3. Simulación de Seguridad: Inyección del Bearer Token
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenSimulado);
-                Console.WriteLine($"[Seguridad] Bearer Token simulado inyectado correctamente.");
-
-                // 4. Consumir el recurso 'equipments' de forma absoluta
-                Console.WriteLine("\n[Petición] Invocando endpoint: https://avihub.pesoexato.com/api/v3/equipments ...");
-                // Al pasarle la URL completa con el string de configuración, evitamos errores de resolución de rutas
-                HttpResponseMessage response = await client.GetAsync(baseUrl + "equipments");
-
-                
-
-                // 5. Procesar la respuesta transaccional
-                if (response.IsSuccessStatusCode)
-                {
-                    string jsonResponse = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine("[Respuesta] JSON recibido con éxito.");
-
-                    // Deserializar usando Newtonsoft.Json
-                    // Nota: Usamos 'dynamic' temporalmente para adaptarnos a cualquier estructura JSON que devuelva la API
-                    dynamic equipos = JsonConvert.DeserializeObject(jsonResponse);
-
-                    Console.WriteLine("\n=== RESUMEN ESTRUCTURADO DE EQUIPOS ===");
-                    Console.WriteLine(JsonConvert.SerializeObject(equipos, Formatting.Indented));
-                }
-                else
-                {
-                    Console.WriteLine($"\n[Error] La API respondió con código de estado: {response.StatusCode} ({(int)response.StatusCode})");
-                    string errorDetail = await response.Content.ReadAsStringAsync();
-                    if (!string.IsNullOrEmpty(errorDetail))
-                    {
-                        Console.WriteLine($"Detalle del error: {errorDetail}");
-                    }
-                }
-            }
-            catch (HttpRequestException httpEx)
-            {
-                Console.WriteLine($"\n[Error de Red] No se pudo conectar con la API: {httpEx.Message}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"\n[Error Inesperado] Ocurrió un fallo en la aplicación: {ex.Message}");
+                Console.WriteLine($"\n[Error] {ex.Message}");
             }
 
             Console.WriteLine("\nPresione cualquier tecla para salir...");
             Console.ReadKey();
         }
+
+
+
+        /// <summary>
+        /// Método independiente encargado exclusivamente de dar formato y mostrar los datos en consola.
+        /// </summary>
+        private static void ImprimirReporteEquipos(ApiResponse<EquipmentDto> resultado)
+        {
+            if (resultado?.Data == null || resultado.Data.Count == 0)
+            {
+                Console.WriteLine("\n[Aviso] No se recibieron datos de equipos para mostrar.");
+                return;
+            }
+
+            Console.WriteLine("\n=== DETALLE COMPLETO Y ESTRUCTURADO DE EQUIPOS (Tipado con DTOs) ===");
+
+            for (int i = 0; i < resultado.Data.Count; i++)
+            {
+                EquipmentDto equipo = resultado.Data[i];
+
+                Console.WriteLine($"\n==================================================");
+                Console.WriteLine($"[Equipo {i + 1}] ID: {equipo.Id}");
+                Console.WriteLine($"--------------------------------------------------");
+                Console.WriteLine($"  Descripción  : {equipo.Description}");
+                Console.WriteLine($"  Modelo       : {equipo.Model}");
+                Console.WriteLine($"  Serie        : {equipo.Serie}");
+                Console.WriteLine($"  Versión      : {equipo.Version}");
+                Console.WriteLine($"  Género/Tipo  : {equipo.Gender}");
+                Console.WriteLine($"  Estado       : {equipo.Status}");
+
+                // Renderizado de Relaciones
+                if (equipo.Relationships != null)
+                {
+                    Console.WriteLine($"  --> RELACIONES Y UBICACIÓN:");
+                    Console.WriteLine($"      ID Núcleo   : {equipo.Relationships.NucleiId} (Número: {equipo.Relationships.NucleiNumber})");
+                    Console.WriteLine($"      Número Lote : {equipo.Relationships.BatchNumber}");
+                    Console.WriteLine($"      Ubicación   : {equipo.Relationships.SideName}");
+                }
+
+                // Renderizado de Marcas de Tiempo
+                if (equipo.Timestamps != null)
+                {
+                    Console.WriteLine($"  --> MARCAS DE TIEMPO:");
+                    Console.WriteLine($"      Zona Horaria: {equipo.Timestamps.TimeZone}");
+
+                    if (equipo.Timestamps.LastConnection != null)
+                    {
+                        Console.WriteLine($"      Última Conexión (UTC)  : {equipo.Timestamps.LastConnection.Utc:yyyy-MM-dd HH:mm:ss}");
+                        Console.WriteLine($"      Última Conexión (Local): {equipo.Timestamps.LastConnection.UnitLocal:yyyy-MM-dd HH:mm:ss zzz}");
+                    }
+                }
+            }
+
+            // Renderizado de Paginación Global
+            if (resultado.Pagination != null)
+            {
+                Console.WriteLine($"\n==================================================");
+                Console.WriteLine($"=== RESUMEN DE PAGINACIÓN ===");
+                Console.WriteLine($"Página Actual    : {resultado.Pagination.CurrentPage}");
+                Console.WriteLine($"Total Registros  : {resultado.Pagination.TotalRecords}");
+                Console.WriteLine($"==================================================");
+            }
+        }
+
     }
 }

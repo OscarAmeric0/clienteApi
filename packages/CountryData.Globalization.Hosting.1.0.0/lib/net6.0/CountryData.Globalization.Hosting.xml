@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CountryData.Globalization.Hosting</name>
+    </assembly>
+    <members>
+        <member name="T:CountryData.Globalization.Hosting.Extensions.CountryDataServiceCollectionExtensions">
+            <summary>
+            Extension methods for registering CountryData services in the dependency injection container.
+            </summary>
+        </member>
+        <member name="M:CountryData.Globalization.Hosting.Extensions.CountryDataServiceCollectionExtensions.AddCountryData(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds CountryData services to the dependency injection container with default options.
+            </summary>
+        </member>
+        <member name="M:CountryData.Globalization.Hosting.Extensions.CountryDataServiceCollectionExtensions.AddCountryData(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{CountryData.Globalization.Hosting.Options.CountryDataOptions})">
+            <summary>
+            Adds CountryData services to the dependency injection container with custom options.
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="configureOptions">Action to configure CountryDataOptions</param>
+        </member>
+        <member name="T:CountryData.Globalization.Hosting.Options.CountryDataOptions">
+            <summary>
+            Configuration options for CountryData library.
+            </summary>
+            <remarks>
+            <para>
+            The CountryData library uses automatic lazy-loaded caching for optimal performance.
+            All caches (RegionInfo, CultureInfo, and lookup indexes) are built on first access
+            and remain in memory for the application lifetime.
+            </para>
+            <para>
+            This class exists for dependency injection pattern consistency and is reserved
+            for future configuration options.
+            </para>
+            </remarks>
+        </member>
+    </members>
+</doc>
