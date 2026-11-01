@@ -47,11 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiResponse.cs" />
-    <Compile Include="AppOrchestrator.cs" />
-    <Compile Include="ConsoleReportView.cs" />
-    <Compile Include="EquipmentService.cs" />
-    <Compile Include="IEquipmentService.cs" />
+    <Compile Include="Models\ApiResponse.cs" />
+    <Compile Include="Controller\AppOrchestrator.cs" />
+    <Compile Include="Views\ConsoleReportView.cs" />
+    <Compile Include="Services\EquipmentService.cs" />
+    <Compile Include="Services\IEquipmentService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 using System.Configuration;
 using ClienteApiTest.Services;
 using ClienteApiTest.Models;
-
+using ClienteApiTest.Controllers;
 
 namespace ClienteApiTest
 {
